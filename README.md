@@ -18,6 +18,11 @@ The Remix Blog is a platform built for users to create and share blog posts. Tha
 
 1. **Clone the Repository**
 2. **Install Dependencies**
+
+```sh
+npm run setup
+```
+
 3. **Set Up Environment Variables**
 
 - Create a `.env` file in the root directory.
@@ -43,6 +48,8 @@ npx prisma migrate dev --name init
 ```sh
 npm run setup
 ```
+
+If have any error in this step, please clean up folder `./prisma`. Just keep `seed.ts` and `schema.prisma`. Then run migrate again.
 
 5. **Start the Server**
 
