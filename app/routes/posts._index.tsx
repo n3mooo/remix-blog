@@ -1,10 +1,11 @@
-import { Card, CardBody, CardFooter, CardHeader, Divider } from "@nextui-org/react";
-import type { MetaFunction } from "@remix-run/node";
+import { Button, Card, CardBody, CardFooter, CardHeader, Divider } from "@nextui-org/react";
+import type { LoaderFunctionArgs, MetaFunction } from "@remix-run/node";
 import { json, useLoaderData, useNavigate } from "@remix-run/react";
 import dayjs from "dayjs";
-import { DotIcon } from "lucide-react";
+import { DotIcon, PlusIcon } from "lucide-react";
+import { requireUserId } from "~/apis/session.server";
 import { getPosts } from "~/models/post.server";
-import { motion } from "framer-motion"
+import { useOptionalUser } from "~/utils";
 
 export const meta: MetaFunction = () => {
   return [
@@ -13,22 +14,38 @@ export const meta: MetaFunction = () => {
   ];
 };
 
-export const loader = async () => {
-  const posts = await getPosts();
+export const loader = async ({ request }: LoaderFunctionArgs) => {
+  const authorId = await requireUserId(request);
+  const posts = await getPosts({ authorId });
   return json({ posts });
 };
 
 export default function Index() {
   const navigate = useNavigate();
   const { posts } = useLoaderData<typeof loader>();
+  const user = useOptionalUser()
 
   return (
     <section>
-      <h1 className="text-7xl font-semibold">ALL BLOGS</h1>
+      <div className="flex flex-row">
+        <h1 className="text-7xl font-semibold leading-tight">Blogs of {user?.email}</h1>
+        <Button
+          size="sm"
+          color="primary"
+          className="self-end"
+          onClick={() => navigate({
+            pathname: `/posts/form`,
+            search: "?action=create",
+          })}
+        >
+          <PlusIcon size={16} />
+          New Post
+        </Button>
+      </div>
       <Divider />
       {posts.map((post) => {
         return (
-          <Card key={post.id} isPressable onPress={() => navigate(`posts/${post.id}`)}>
+          <Card key={post.id} isPressable onPress={() => navigate(`${post.id}`)}>
             <CardHeader className="justify-between">
               <div className="flex flex-col gap-2">
                 <p className="text-small text-primary text-left">

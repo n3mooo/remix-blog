@@ -1,40 +1,99 @@
-# Welcome to Remix!
+# Remix Blog
 
-- 📖 [Remix docs](https://remix.run/docs)
+## Description
 
-## Development
+The Remix Blog is a platform built for users to create and share blog posts. That is where developers to learn, collaborate, and grow together.
 
-Run the dev server:
+## Installation
 
-```shellscript
+### Prerequisites
+
+- Node.js (>=20.0.0)
+- npm (Node Package Manager)
+- SQLite
+- Prisma CLI (optional for database migrations)
+- A `.env` file with `DATABASE_URL` and `SESSION_SECRET` variables.
+
+### Steps
+
+1. **Clone the Repository**
+2. **Install Dependencies**
+3. **Set Up Environment Variables**
+
+- Create a `.env` file in the root directory.
+- Add the following lines, replacing the placeholders with your actual database URL and session secret:
+
+```
+  DATABASE_URL="your_database_url"
+  SESSION_SECRET="your_session_secret"
+```
+
+If you don't have openssl installed, you can also use [1Password](https://1password.com/password-generator) to generate a random secret, just replace `$(openssl rand -hex 32)` with the generated secret.
+
+4. **Database Setup**
+
+- Run the following command to migrate your database:
+
+```
+npx prisma migrate dev --name init
+```
+  
+- Initial setup:
+
+```sh
+npm run setup
+```
+
+5. **Start the Server**
+
+```sh
 npm run dev
 ```
 
-## Deployment
+This starts your app in development mode, rebuilding assets on file changes.
 
-First, build your app for production:
+The database seed script creates a new user with some data you can use to get started:
 
-```sh
-npm run build
-```
+- Email: `hello@liam.dev`
+- Password: `strongpassword`
 
-Then run the app in production mode:
+## Relevant code
 
-```sh
-npm start
-```
+The main functionality is creating users, logging in and out, and creating and deleting posts.
 
-Now you'll need to pick a host to deploy it to.
+- creating users, and logging in and out [./app/models/user.server.ts](./app/models/user.server.ts)
+- user sessions, and verifying them [./app/apis/session.server.ts](./app/session.server.ts)
+- creating, and deleting posts [./app/models/post.server.ts](./app/models/post.server.ts)
 
-### DIY
+## Usage
 
-If you're familiar with deploying Node applications, the built-in Remix app server is production-ready.
+### Home Page
 
-Make sure to deploy the output of `npm run build`
+You can see all post of all user
 
-- `build/server`
-- `build/client`
+### Creating an Account
 
-## Styling
+Creating a new account to use feture CRUD post.
 
-This template comes with [Tailwind CSS](https://tailwindcss.com/) already configured for a simple default starting experience. You can use whatever css framework you prefer. See the [Vite docs on css](https://vitejs.dev/guide/features.html#css) for more information.
+### Posting a Blog
+
+- Once logged in, click on User and navigate to "my posts".
+- Click the "New Post" button
+- Fill in the details of your blog post and submit.
+
+### View
+
+Browse through various blog posts from the post page and the homepage.
+
+### Delete and Update Post
+
+You can delete or update the post if you are author
+
+## Features
+
+- Built with the latest Remix framework.
+- Uses SQLite for lightweight and efficient data management.
+- Prisma ORM for easy database management.
+- React Icons for enhanced UI elements.
+- User authentication for personalized experiences.
+- Capabilities to create, view, and delete blog posts.
