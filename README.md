@@ -20,7 +20,7 @@ The Remix Blog is a platform built for users to create and share blog posts. Tha
 2. **Install Dependencies**
 
 ```sh
-npm run setup
+npm install
 ```
 
 3. **Set Up Environment Variables**
