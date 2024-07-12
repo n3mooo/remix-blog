@@ -184,31 +184,6 @@ export default function PostCreate() {
         />
 
         <div className="w-full flex flex-row gap-2 items-center justify-end">
-          <Popover isOpen={isOpen} onOpenChange={setIsOpen} placement="left" showArrow>
-            <PopoverTrigger>
-              <Button variant="flat" color="danger">
-                Delete
-              </Button>
-            </PopoverTrigger>
-            <PopoverContent>
-              <div className="px-1 py-2">
-                <div className="text-small font-bold">Delete post!</div>
-                <div className="text-tiny">This action cannot be undone. Are you sure?</div>
-                <div className="flex gap-2 mt-2 justify-end items-center">
-                  <Button size="sm" variant="bordered" className="text-xs py-1 min-w-max h-auto"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    Cancel
-                  </Button>
-                  <Form method="post">
-                    <Button color="primary" size="sm" type="submit" variant="solid" className="text-xs py-1 min-w-max h-auto">
-                      OK
-                    </Button>
-                  </Form>
-                </div>
-              </div>
-            </PopoverContent>
-          </Popover>
           <Button color="primary" variant="solid" type="submit">
             Save
           </Button>

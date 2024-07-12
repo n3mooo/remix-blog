@@ -1,7 +1,7 @@
-import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownSection, DropdownTrigger, Image, Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenuToggle } from "@nextui-org/react";
+import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownSection, DropdownTrigger, Image, Navbar, NavbarBrand, NavbarContent, NavbarItem } from "@nextui-org/react";
 import { Form, Link, useNavigate } from "@remix-run/react";
-import React from "react";
 import { useOptionalUser } from "~/utils";
+import { Logo } from "../common/icons";
 
 export default function Header() {
   const user = useOptionalUser();
@@ -11,7 +11,7 @@ export default function Header() {
     <Navbar isBordered isBlurred classNames={{ wrapper: "max-w-4xl" }}>
       <NavbarContent>
         <NavbarBrand as={Link} to={"/"} className="max-h-16 overflow-hidden">
-          <Image src="./logo1.1.svg" alt="" width={80} className="object-cover" />
+          <Logo />
         </NavbarBrand>
       </NavbarContent>
 
@@ -98,7 +98,7 @@ export default function Header() {
             </DropdownMenu>
           </Dropdown>
           : <>
-            <NavbarItem className="hidden lg:flex" as={Link} to={"/login"}>
+            <NavbarItem as={Link} to={"/login"}>
               Login
             </NavbarItem>
             <NavbarItem as={Link} to={"/register"}>

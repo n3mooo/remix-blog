@@ -38,7 +38,7 @@ export default function Post() {
   return (
     <section className="flex flex-col gap-2 mx-auto max-w-3xl px-4 sm:px-6">
       <div className="flex flex-row justify-end gap-2 items-center">
-        {user!.id === post.authorId && (
+        {user && user.id === post.authorId && (
           <ActionConpact
             onCreate={() => navigate({
               pathname: `/posts/form`,
